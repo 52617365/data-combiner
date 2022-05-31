@@ -24,5 +24,7 @@ mod tests {
 
         println!("{}", resulting_data.len());
         assert_eq!(expected_data_length, resulting_data.len() as u16);
+
+        assert!(resulting_data[0]["email"].as_str().expect("Error turning value into string").len() > 0);
     }
 }
