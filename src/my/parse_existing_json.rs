@@ -1,6 +1,7 @@
-use serde_json::Value;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+
+use serde_json::Value;
 
 pub fn parse_existing_json(filename: &str) -> Vec<serde_json::Map<String, Value>> {
     let lines = read_file(filename);
@@ -9,7 +10,8 @@ pub fn parse_existing_json(filename: &str) -> Vec<serde_json::Map<String, Value>
     for line in lines.iter() {
         let parsed: Value =
             serde_json::from_str(line).expect("Error turning line into json, check your format.");
-        json_lines.push(parsed.as_object().expect("Error turning json string into object.").clone());
+        let parsed_object = parsed.as_object().expect("Error turning json string into object.").clone();
+        json_lines.push(parsed_object);
     }
     json_lines
 }
