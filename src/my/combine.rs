@@ -1,3 +1,4 @@
+use std::path::Path;
 use super::{parse_additional_csv::parse_additional_csv, parse_existing_json::parse_existing_json};
 
 pub struct combined_format {
@@ -34,7 +35,7 @@ pub fn combine(existing_path: &str) -> Vec<combined_format> {
         for data in additional_data.iter() {
             if &data.database == name {
                 let combined = combined_format {
-                    database: name.clone(),
+                    database: Path::new(&name).file_name().expect("error getting filename").to_str().expect("Error converting filename into string").to_string(),
                     breach_date: data.dumped.clone(),
                     lines: existing_data.len().to_string(),
                 };
