@@ -1,1 +1,2 @@
 mod my;
+mod tests;
