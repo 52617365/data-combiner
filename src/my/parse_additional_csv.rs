@@ -4,13 +4,13 @@ use csv::ReaderBuilder;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, Eq, PartialEq)]
-struct Format {
-    database: String,
-    entries: String,
-    dumped: String,
+pub struct Format {
+    pub database: String,
+    pub entries: String,
+    pub dumped: String,
 }
 
-pub fn parse_additional_csv() -> Result<(), Box<dyn Error>> {
+pub fn parse_additional_csv() -> Result<Vec<Format>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     let mut rdr = ReaderBuilder::new()
         .has_headers(false)
@@ -23,6 +23,5 @@ pub fn parse_additional_csv() -> Result<(), Box<dyn Error>> {
         let record: Format = result?;
         additional_data.push(record);
     }
-    println!("{:?}", additional_data);
-    Ok(())
+    Ok(additional_data)
 }
