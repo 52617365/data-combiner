@@ -1,15 +1,8 @@
-use std::process;
-
 use crate::my::combine::combine;
-use crate::my::parse_existing_json::parse_existing_json;
-
+use crate::my::write_as_csv::write_as_csv;
 mod my;
 
 fn main() {
-    if let Err(err) = my::parse_additional_csv::parse_additional_csv() {
-        println!("error running example: {}", err);
-        process::exit(1);
-    }
-    let json_lines = parse_existing_json("./data/tests/example_existing.txt");
-    let database_names = combine("./data/tests/example_existing.txt");
+    let combined_data = combine("./data/tests/example_existing.txt");
+    write_as_csv(combined_data, "./data/combined_data.csv").expect("Error writing csv lines into file.");
 }

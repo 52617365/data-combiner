@@ -1,7 +1,5 @@
 #[cfg(test)]
 mod tests {
-    // use crate::my::parse_additional_csv::Format;
-
     use crate::my::combine::combine;
     use crate::my::parse_additional_csv::parse_additional_csv;
     use crate::my::parse_existing_json::parse_existing_json;
